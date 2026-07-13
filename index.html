@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/logo.png?v=1" type="image/png">
+    <title>煦和醫療體系(SULIGHT CLINIC) | 專業引路，溫暖照護</title>
+    <!-- 引入 Google Fonts 提升質感 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* ----------------------------------------------------
+           專屬品牌色彩計畫 (完全杜絕 Bootstrap 預設配色)
+           ---------------------------------------------------- */
+        :root {
+            --sulight-bg-oatmeal: #F9F6F0;
+            /* 品牌主調：燕麥暖白 */
+            --sulight-sage-core: #6B8E7B;
+            /* 專業形象：鼠尾草綠 */
+            --sulight-sage-dark: #3F5548;
+            /* 內斂深色：深鼠尾草綠 */
+            --sulight-apricot-accent: #E29C74;
+            /* 溫暖點綴：暖陽杏 */
+            --sulight-charcoal-text: #2C3531;
+            /* 高對比閱讀：深碳灰 */
+            --sulight-muted-gray: #6E7571;
+            /* 次要內文：輕灰 */
+
+            /* 純白與純黑基礎擴展 */
+            --sulight-pure-white: #FFFFFF;
+            --sulight-soft-shadow: rgba(107, 142, 123, 0.06);
+
+            /* 企劃指定圓角設計 */
+            --sulight-radius-lg: 16px;
+            --sulight-radius-sm: 8px;
+        }
+
+        /* 全域重設與基礎字體設定 */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Noto Sans TC', sans-serif;
+        }
+
+        body {
+            background-color: var(--sulight-bg-oatmeal);
+            color: var(--sulight-charcoal-text);
+            line-height: 1.8;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* 頂部客製化導覽列 */
+        .clinic-header {
+            background-color: rgba(249, 246, 240, 0.96);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.01);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(107, 142, 123, 0.05);
+        }
+
+        .nav-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-identity {
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+        }
+
+        .brand-identity .title-main {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--sulight-sage-core);
+            letter-spacing: 2px;
+            line-height: 1.2;
+        }
+
+        .brand-identity .title-sub {
+            font-size: 11px;
+            color: var(--sulight-muted-gray);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        .menu-links a {
+            text-decoration: none;
+            color: var(--sulight-charcoal-text);
+            margin-left: 35px;
+            font-size: 15px;
+            font-weight: 500;
+            position: relative;
+            padding-bottom: 4px;
+            transition: color 0.3s ease;
+        }
+
+        .menu-links a:hover {
+            color: var(--sulight-sage-core);
+        }
+
+        /* 網頁主視覺區 (Hero Section) - 採漸進淡入 */
+        .intro-hero {
+            padding: 200px 20px 110px 20px;
+            text-align: center;
+            max-width: 940px;
+            margin: 0 auto;
+            animation: sulightFadeIn 1.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        @keyframes sulightFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .intro-hero h1 {
+            font-size: 44px;
+            font-weight: 700;
+            color: var(--sulight-sage-dark);
+            line-height: 1.5;
+            margin-bottom: 28px;
+            letter-spacing: 0.5px;
+        }
+
+        .intro-hero p {
+            font-size: 19px;
+            color: var(--sulight-muted-gray);
+            margin-bottom: 45px;
+            letter-spacing: 1px;
+        }
+
+        /* 暖陽杏專屬按鈕 */
+        .action-button {
+            display: inline-block;
+            background-color: var(--sulight-apricot-accent);
+            color: var(--sulight-pure-white);
+            padding: 15px 40px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 1px;
+            box-shadow: 0 6px 20px rgba(226, 156, 116, 0.25);
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .action-button:hover {
+            transform: translateY(-2px);
+            background-color: #D38E66;
+            box-shadow: 0 8px 25px rgba(226, 156, 116, 0.35);
+        }
+
+        /* 三大核心服務卡片區 */
+        .services-layout {
+            max-width: 1200px;
+            margin: 40px auto 140px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .custom-card {
+            background-color: var(--sulight-pure-white);
+            padding: 55px 45px;
+            border-radius: var(--sulight-radius-lg);
+            box-shadow: 0 12px 40px var(--sulight-soft-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            border: 1px solid rgba(107, 142, 123, 0.04);
+        }
+
+        /* 卡片頂部精緻細線，強化品牌視覺流暢度 */
+        .custom-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: var(--sulight-sage-core);
+            border-radius: var(--sulight-radius-lg) var(--sulight-radius-lg) 0 0;
+        }
+
+        .custom-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 45px rgba(107, 142, 123, 0.12);
+        }
+
+        .card-visual-icon {
+            font-size: 34px;
+            margin-bottom: 24px;
+            display: inline-block;
+            opacity: 0.9;
+        }
+
+        .custom-card h3 {
+            font-size: 22px;
+            color: var(--sulight-sage-dark);
+            margin-bottom: 18px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .custom-card p {
+            font-size: 15px;
+            color: var(--sulight-muted-gray);
+            text-align: justify;
+        }
+
+        /* 頁尾與跨品牌相互引流 */
+        .clinic-footer {
+            background-color: var(--sulight-pure-white);
+            border-top: 1px solid rgba(107, 142, 123, 0.08);
+            padding: 70px 20px 45px 20px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* 串聯丰蘊品牌（暮紫色調暗示）的弱連結導流框 */
+        .brand-cross-link {
+            background-color: var(--sulight-bg-oatmeal);
+            padding: 26px 45px;
+            border-radius: var(--sulight-radius-lg);
+            margin-bottom: 45px;
+            max-width: 720px;
+            font-size: 14.5px;
+            color: var(--sulight-muted-gray);
+            border: 1px dashed var(--sulight-sage-core);
+        }
+
+        .brand-cross-link .glow-link {
+            color: #7A5C7A;
+            font-weight: 700;
+            text-decoration: none;
+            border-bottom: 1px solid #7A5C7A;
+            margin-left: 4px;
+            padding-bottom: 2px;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .brand-cross-link .glow-link:hover {
+            color: #5A405A;
+            border-color: #5A405A;
+        }
+
+        .copyright-text {
+            font-size: 13px;
+            color: var(--sulight-muted-gray);
+            letter-spacing: 0.5px;
+        }
+
+        .map-container {
+            width: 100%;
+            /* 讓容器撐滿外層 */
+            display: flex;
+            /* 啟用 Flexbox 佈局 */
+            justify-content: center;
+            /* 關鍵：讓內部元件（地圖）水平置中 */
+            margin: 40px 0;
+            /* 上下保留一點呼吸空間，可依需求調整 */
+        }
+
+        /* 讓圖片完美填滿滿，並加上柔和的縮放動畫 */
+        .member-photo {
+            width: 230px;
+            height: 230px;
+            /* 維持與外層盒子一樣的高度 */
+            object-fit: cover;
+            /* 關鍵：確保照片按比例裁剪，不拉伸變形 */
+            border-radius: 50%;
+            /* ✨ 讓照片呈現完美的圓形大頭照，極具專業感 */
+            display: block;
+            box-shadow: 0 4px 15px rgba(107, 142, 123, 0.15);
+            /* 幫頭像加上細緻的陰影 */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* 當滑鼠滑過照片時，照片會微微放大，增加互動質感 */
+        .member-photo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(107, 142, 123, 0.25);
+            /* 陰影加深 */
+        }
+
+        /* 修正外層盒子的溢出隱藏，確保放大時照片不會超出卡片圓角 */
+        .member-photo-box {
+            background-color: #F0EDE5;
+            height: 240px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            /* 關鍵：裁切超出圓角的圖片 */
+        }
+
+        /* 品牌理念區塊主視覺 */
+        .philosophy-section {
+            max-width: 1200px;
+            margin: 60px auto 100px auto;
+            padding: 0 20px;
+        }
+
+        .philosophy-wrapper {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            /* 左右黃金比例 */
+            gap: 60px;
+            align-items: center;
+            background-color: var(--sulight-pure-white);
+            padding: 60px;
+            border-radius: var(--sulight-radius-lg);
+            box-shadow: 0 12px 40px var(--sulight-soft-shadow);
+            border: 1px solid rgba(107, 142, 123, 0.04);
+        }
+
+        /* 左側文字內容 */
+        .philosophy-content .section-tag {
+            font-size: 13px;
+            color: var(--sulight-apricot-accent);
+            letter-spacing: 2px;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 12px;
+        }
+
+        .philosophy-content h2 {
+            font-size: 32px;
+            color: var(--sulight-sage-dark);
+            margin-bottom: 24px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .philosophy-highlight {
+            font-size: 18px;
+            color: var(--sulight-sage-core);
+            font-weight: 500;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            border-left: 3px solid var(--sulight-apricot-accent);
+            padding-left: 15px;
+        }
+
+        .philosophy-text {
+            font-size: 15px;
+            color: var(--sulight-muted-gray);
+            text-align: justify;
+            margin-bottom: 35px;
+        }
+
+        /* 限制整體內容最大寬度，並居中，防止兩側無限延伸 */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* 標題與引言 */
+        .section-title {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .section-desc {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        /* 使用 Flexbox 讓文字與照片左右並排 */
+        .doctor-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            /* 左右之間的間距 */
+            background-color: #f7f5f0;
+            /* 配合你原本的背景色 */
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        /* 文字區塊佔 60% 寬度 */
+        .doctor-info {
+            flex: 1;
+            text-align: left;
+        }
+
+        .doctor-info .title {
+            font-size: 14px;
+            color: #888;
+        }
+
+        .doctor-info .name {
+            font-size: 22px;
+            margin: 4px 0 12px 0;
+        }
+
+        .doctor-info p {
+            font-size: 15px;
+            line-height: 1.6;
+            color: #444;
+        }
+
+        /* 照片區塊 */
+        .doctor-img img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            /* 保持圓形 */
+            object-fit: cover;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            /* 加點微陰影提升質感 */
+        }
+
+        /* 手機版自動切換回上下排列 */
+        @media (max-width: 768px) {
+            .doctor-card {
+                flex-direction: column-reverse;
+                /* 手機上照片在上面，文字在下面 */
+                text-align: center;
+            }
+
+            .doctor-info {
+                text-align: center;
+            }
+        }
+
+        /* 核心價值小指標 */
+        .value-indicators {
+            display: flex;
+            gap: 25px;
+        }
+
+        .value-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--sulight-charcoal-text);
+        }
+
+        .value-dot {
+            width: 6px;
+            height: 6px;
+            background-color: var(--sulight-sage-core);
+            border-radius: 50%;
+        }
+
+        /* 右側意象圖盒 */
+        .philosophy-visual {
+            height: 100%;
+            min-height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .visual-box {
+            background-color: var(--sulight-bg-oatmeal);
+            width: 100%;
+            height: 100%;
+            border-radius: var(--sulight-radius-lg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            border: 1px dashed rgba(107, 142, 123, 0.2);
+        }
+
+        .visual-icon {
+            font-size: 60px;
+        }
+
+        .visual-box p {
+            font-size: 14px;
+            color: var(--sulight-sage-core);
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+
+        /* 品牌理念區專屬 Logo 樣式 */
+        .philosophy-logo {
+            max-width: 160px;
+            /* 限制 Logo 最大寬度，使其精緻不突兀 */
+            height: auto;
+            /* 高度自動等比例縮放，防止圖片變形 */
+            display: block;
+            margin-bottom: 5px;
+            /* 與下方文字保持優雅間距 */
+            filter: drop-shadow(0 4px 10px rgba(107, 142, 123, 0.08));
+            /* 幫 Logo 加上極輕微的柔和陰影 */
+        }
+
+        /* 響應式手機版調整 */
+        @media (max-width: 992px) {
+            .philosophy-wrapper {
+                grid-template-columns: 1fr;
+                /* 手機版改為單欄上下排列 */
+                gap: 40px;
+                padding: 40px 30px;
+            }
+
+            .philosophy-visual {
+                min-height: 200px;
+            }
+
+            .philosophy-content h2 {
+                font-size: 26px;
+            }
+        }
+
+        /* 響應式斷點調整（手機版） */
+        @media (max-width: 768px) {
+            .nav-wrapper {
+                flex-direction: column;
+                gap: 18px;
+                padding: 15px;
+            }
+
+            .menu-links a {
+                margin: 0 12px;
+                font-size: 14px;
+            }
+
+            .intro-hero {
+                padding: 160px 20px 80px 20px;
+            }
+
+            .intro-hero h1 {
+                font-size: 30px;
+            }
+
+            .intro-hero p {
+                font-size: 16px;
+            }
+
+            .custom-card {
+                padding: 45px 30px;
+            }
+
+            .brand-cross-link {
+                padding: 20px 25px;
+                font-size: 13.5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 頂部客製化導覽列 -->
+    <header class="clinic-header">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-identity"></a>
+            <span class="brand-name">煦和醫療</span>
+            <span class="brand-sub">SULIGHT CLINIC</span>
+            </a>
+            <nav class="menu-links">
+                <a href="#services">品牌理念</a>
+                <a href="#services">服務項目</a>
+                <a href="php/team.php">醫療團隊</a>
+                <a href="php/features.php">優勢特色</a>
+                <a href="php/consulting.php">心理諮商</a>
+                <a href="php/longterm_care.php">長期照顧</a>
+                <a href="php/booking.php">預約表單</a>
+                <a href="php/branches.php">門市資訊</a>
+            </nav>
+        </div>
+    </header>
+
+
+
+    <!-- 網頁主視覺區塊 -->
+    <main>
+        <section class="intro-hero">
+            <h1>醫學的嚴謹，照護的溫煦。<br>在這裡，我們聽見身體與心靈的需要。</h1>
+            <p>全人醫療 ｜ 心理諮商 ｜ 長期照顧 — 成為您與家人最安心的健康後盾。</p>
+            <a href="#services-section" class="action-button">探索照護服務</a>
+        </section>
+
+        <!-- 1.5 品牌理念區塊 -->
+        <section class="philosophy-section" id="brand-philosophy">
+            <div class="philosophy-wrapper">
+                <!-- 左側：感性文案與核心價值 -->
+                <div class="philosophy-content">
+                    <span class="section-tag">品牌理念(BRAND CONCEPT)</span>
+                    <h2>煦色照護，和煦如初</h2>
+                    <p class="philosophy-highlight">
+                        「煦」是冬日裡初升的暖陽，溫柔而不炙熱；「和」是身心靈回歸平衡的舒適狀態。
+                    </p>
+                    <p class="philosophy-text">
+                        我們相信，醫療不該只是冰冷的診斷與藥方，而是一場充滿溫度的陪伴。煦和醫療體系結合了嚴謹的實證醫學、深度同理的心理諮商，以及尊嚴尊重的長照關懷。我們聽見身體的抗議，更懂心靈的疲憊，致力於為您打造一個像家一樣安心的療癒港灣。
+                    </p>
+
+                    <!-- 核心三價值小指標 -->
+                    <div class="value-indicators">
+                        <div class="value-item">
+                            <span class="value-dot"></span>
+                            <span>嚴謹醫學</span>
+                        </div>
+                        <div class="value-item">
+                            <span class="value-dot"></span>
+                            <span>全人同理</span>
+                        </div>
+                        <div class="value-item">
+                            <span class="value-dot"></span>
+                            <span>奢華療癒</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右側：意象視覺區（留白質感） -->
+                <div class="philosophy-visual">
+                    <div class="visual-box">
+                        <!-- 預留理念意象圖位置，目前以溫暖手勢 Icon 替代 -->
+                        <img src="images/logo.png" alt="煦和醫療體系 Logo" class="philosophy-logo">
+                        <p>專業引路 ｜ 溫暖照護</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 三大核心服務區塊 -->
+         
+        <section class="services-layout" id="services-section">
+            
+            <!-- 服務卡片 1 -->
+            <div class="custom-card">
+                <span class="section-tag">服務項目一</span>
+                <span class="card-visual-icon">🩺</span>
+                <h3>專業醫療 ｜ 嚴謹致遠</h3>
+                <p>我們以實證醫學為核心，結合先進設備與資深醫療團隊，為您的健康嚴格把關。每一次診斷，都是對生命的尊重。</p>
+            </div>
+
+            <!-- 服務卡片 2 -->
+            <div class="custom-card">
+                <span class="section-tag">服務項目二</span>
+                <span class="card-visual-icon">🌱</span>
+                <h3>心理諮商 ｜ 溫柔接住</h3>
+                <p>在完全隱私、安全的空間裡，由專業心理師陪你梳理情緒的結。在這裡，你可以放心脆弱，我們會好好接住你。</p>
+            </div>
+
+            <!-- 服務卡片 3 -->
+            <div class="custom-card">
+                <span class="section-tag">服務項目三</span>
+                <span class="card-visual-icon">🏡</span>
+                <h3>長照服務 ｜ 煦煦相伴</h3>
+                <p>延伸家的溫暖，轉化照顧的重擔。我們提供在地化、尊嚴化的長照媒合與居家護理，讓安心成為日常生活。</p>
+            </div>
+
+        </section>
+
+    
+
+    </main>
+
+    <!-- 6.頁尾與跨品牌整合 -->
+    <footer class="clinic-footer">
+        <div class="footer-content">
+            <!-- 跨品牌生態圈互導區塊 -->
+            <div class="brand-cross-link">
+                當身體與心靈重獲平衡，歡迎至
+                <a href="#" class="glow-link" onclick="alert('即將前往 丰蘊 INNER GLOW 心靈美學空間'); return false;">【丰蘊 INNER
+                    GLOW】</a>
+                探索進階的身心美學與醫美調理。
+            </div>
+
+            <div class="copyright-text">
+                &copy; 2026 煦和醫療體系 SULIGHT CLINIC. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+
+</body>
+
+</html>
